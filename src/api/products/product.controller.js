@@ -23,10 +23,10 @@ const createProduct = asyncHandler(async (req, res) => {
 const getAllProducts = asyncHandler(async (req, res) => {
   // Example filter: /products?name=Laptop
   const filter = req.query.name ? { name: { $regex: req.query.name, $options: 'i' } } : {};
-  
+
   // Example options: /products?page=1&limit=5&sortBy=price:desc
   const options = buildQueryOptions(req.query);
-  
+
   const result = await productService.queryProducts(filter, options);
   new ApiResponse(httpStatus.OK, result).send(res);
 });
@@ -64,10 +64,4 @@ const deleteProductById = asyncHandler(async (req, res) => {
   new ApiResponse(httpStatus.OK, null, 'Product deleted successfully.').send(res);
 });
 
-export {
-  createProduct,
-  getAllProducts,
-  getProductById,
-  updateProductById,
-  deleteProductById,
-};
+export { createProduct, getAllProducts, getProductById, updateProductById, deleteProductById };

@@ -45,11 +45,7 @@ const saveRefreshToken = async (token, userId, expires) => {
  */
 export const generateAuthTokens = async (user) => {
   // 1. Create Access Token
-  const accessToken = generateToken(
-    user._id,
-    config.jwt.expiresIn,
-    config.jwt.secret
-  );
+  const accessToken = generateToken(user._id, config.jwt.expiresIn, config.jwt.secret);
 
   // 2. Create Refresh Token
   const refreshTokenExpires = new Date(

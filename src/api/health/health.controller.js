@@ -1,6 +1,6 @@
+import httpStatus from 'http-status';
 import { ApiResponse } from '../../core/ApiResponse.js';
 import { asyncHandler } from '../../core/asyncHandler.js';
-import httpStatus from 'http-status';
 
 /**
  * @desc    Health check endpoint

@@ -39,7 +39,7 @@ jobs:
           MONGODB_URI: mongodb://localhost:27017/ci-test-db # This will fail unless a service is running
           JWT_SECRET: test-secret
           JWT_REFRESH_SECRET: test-refresh-secret
-          
+
       # Note: The test step above will fail without a running MongoDB.
       # For a real CI, you should add a 'services' block to the job:
       # services:

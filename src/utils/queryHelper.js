@@ -9,7 +9,7 @@ export const buildQueryOptions = (query) => {
   // Pagination
   options.page = parseInt(query.page, 10) || 1;
   options.limit = parseInt(query.limit, 10) || 10;
-  
+
   // Max limit
   if (options.limit > 100) {
     options.limit = 100;
@@ -24,6 +24,6 @@ export const buildQueryOptions = (query) => {
   }
 
   // TODO: Add 'select' (field projection) or 'populate' logic here if needed
-  
+
   return options;
 };

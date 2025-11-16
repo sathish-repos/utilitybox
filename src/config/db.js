@@ -27,7 +27,7 @@ const connectDB = async () => {
 
   try {
     logger.info('Creating new MongoDB connection...');
-    
+
     // Mongoose 5+ options are set by default.
     // We can add serverless-specific optimizations here if needed.
     const connection = await mongoose.connect(config.mongodbUri, {
@@ -54,7 +54,7 @@ const connectDB = async () => {
     logger.error('Could not connect to MongoDB:', error.message);
     // In a serverless function, we might just let it fail.
     // In a long-running process, we'd exit.
-    process.exit(1); 
+    process.exit(1);
   }
 };
 

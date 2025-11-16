@@ -102,7 +102,7 @@ export const logoutUser = async (refreshToken, userId) => {
   if (!refreshToken) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Refresh token is required');
   }
-  
+
   // Delete the specific refresh token from the database
   const tokenDoc = await tokenService.deleteToken(refreshToken);
 
@@ -111,9 +111,9 @@ export const logoutUser = async (refreshToken, userId) => {
     // No need to throw an error.
     return;
   }
-  
+
   // Ensure the token belonged to the user who is logging out
   if (tokenDoc.user.toString() !== userId.toString()) {
-     throw new ApiError(httpStatus.FORBIDDEN, 'Invalid token for this user.');
+    throw new ApiError(httpStatus.FORBIDDEN, 'Invalid token for this user.');
   }
 };

@@ -2,12 +2,12 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import httpStatus from 'http-status';
 import config from './config/index.js';
 import { globalRateLimiter } from './middleware/rateLimiter.middleware.js';
 import globalErrorHandler from './middleware/errorHandler.middleware.js';
 import apiV1Router from './api/index.js';
 import { ApiError } from './core/ApiError.js';
-import httpStatus from 'http-status';
 
 const app = express();
 

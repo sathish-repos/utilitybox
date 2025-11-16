@@ -19,7 +19,7 @@ module.exports = {
 
   // Use this transform for ES Modules
   transform: {},
-  
+
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   // This helps Jest understand ES Modules
   moduleNameMapper: {

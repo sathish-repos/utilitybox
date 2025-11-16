@@ -1,7 +1,7 @@
 import request from 'supertest';
+import mongoose from 'mongoose';
 import app from '../../app.js'; // Import the configured Express app
 import connectDB from '../../config/db.js';
-import mongoose from 'mongoose';
 import { User } from '../../models/User.model.js';
 import { Token } from '../../models/Token.model.js';
 
@@ -11,7 +11,8 @@ import { Token } from '../../models/Token.model.js';
 
 beforeAll(async () => {
   // Use a dedicated test database
-  process.env.MONGODB_URI = process.env.TEST_MONGODB_URI || 'mongodb://localhost:27017/enterprise-api-test';
+  process.env.MONGODB_URI =
+    process.env.TEST_MONGODB_URI || 'mongodb://localhost:27017/enterprise-api-test';
   await connectDB();
 });
 
@@ -26,7 +27,6 @@ afterAll(async () => {
 });
 
 describe('Auth Routes - /api/v1/auth', () => {
-  
   describe('POST /register', () => {
     it('should register a new user successfully', async () => {
       const newUser = {
@@ -35,16 +35,13 @@ describe('Auth Routes - /api/v1/auth', () => {
         password: 'Password123!',
       };
 
-      const res = await request(app)
-        .post('/api/v1/auth/register')
-        .send(newUser)
-        .expect(201); // HTTP CREATED
+      const res = await request(app).post('/api/v1/auth/register').send(newUser).expect(201); // HTTP CREATED
 
       // Check response body
       expect(res.body.success).toBe(true);
       expect(res.body.data.user.email).toBe(newUser.email);
       expect(res.body.data.accessToken).toBeDefined();
-      
+
       // Check response cookie
       expect(res.headers['set-cookie'][0]).toContain('refreshToken=');
 

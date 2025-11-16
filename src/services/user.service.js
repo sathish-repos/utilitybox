@@ -62,7 +62,7 @@ export const softDeleteUserById = async (userId) => {
   }
   user.isActive = false;
   await user.save();
-  
+
   // TODO: Also invalidate all their refresh tokens
   // await tokenService.invalidateAllUserTokens(userId);
 };
@@ -76,19 +76,19 @@ export const softDeleteUserById = async (userId) => {
 export const queryUsers = async (filter, options) => {
   // Add soft-delete filter
   const queryFilter = { ...filter, isActive: { $ne: false } };
-  
+
   // We don't have the paginate plugin on User, so we do it manually
   // Or, we could add it. Let's add it for consistency.
   // **UPDATE**: I'll do it manually to show a different pattern.
-  
+
   const limit = options.limit || 10;
   const page = options.page || 1;
   const skip = (page - 1) * limit;
   const sortBy = options.sortBy ? options.sortBy.replace(':', ' ') : 'createdAt';
-  
+
   const users = await User.find(queryFilter).sort(sortBy).skip(skip).limit(limit);
   const totalUsers = await User.countDocuments(queryFilter);
-  
+
   return {
     results: users,
     page,

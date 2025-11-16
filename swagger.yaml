@@ -40,7 +40,7 @@ paths:
                 $ref: '#/components/schemas/AuthResponse'
         '400':
           description: Bad request (validation error, email taken)
-          
+
   /auth/login:
     post:
       summary: Log in a user
@@ -99,7 +99,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProductPaginated'
-                
+
 components:
   schemas:
     User:
@@ -118,7 +118,7 @@ components:
           type: string
           enum: [user, admin]
           example: user
-          
+
     AuthResponse:
       type: object
       properties:
@@ -136,7 +136,7 @@ components:
             accessToken:
               type: string
               example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6...'
-              
+
     Product:
       type: object
       properties:
@@ -150,7 +150,7 @@ components:
           type: number
         stock:
           type: integer
-          
+
     ProductPaginated:
       type: object
       properties:
@@ -166,7 +166,7 @@ components:
           type: integer
         totalResults:
           type: integer
-          
+
   securitySchemes:
     bearerAuth:
       type: http

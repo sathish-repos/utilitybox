@@ -1,6 +1,6 @@
 import httpStatus from 'http-status';
-import { ApiError } from '../core/ApiError.js';
 import { ZodError } from 'zod';
+import { ApiError } from '../core/ApiError.js';
 
 /**
  * Middleware to validate request data using a Zod schema.
@@ -15,7 +15,7 @@ export const validate = (schema) => (req, res, next) => {
       params: req.params,
       cookies: req.cookies,
     });
-    
+
     // If validation succeeds, move to the next middleware
     next();
   } catch (error) {

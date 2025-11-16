@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import httpStatus from 'http-status';
 import { asyncHandler } from '../../core/asyncHandler.js';
 import { ApiResponse } from '../../core/ApiResponse.js';
@@ -22,11 +23,9 @@ const registerUser = asyncHandler(async (req, res) => {
 
   res.cookie('refreshToken', refreshToken, cookieOptions);
 
-  new ApiResponse(
-    httpStatus.CREATED,
-    { user, accessToken },
-    'User registered successfully.'
-  ).send(res);
+  new ApiResponse(httpStatus.CREATED, { user, accessToken }, 'User registered successfully.').send(
+    res
+  );
 });
 
 /**
@@ -50,10 +49,9 @@ const loginUser = asyncHandler(async (req, res) => {
  */
 const refreshAccessToken = asyncHandler(async (req, res) => {
   const incomingRefreshToken = req.body.refreshToken || req.cookies.refreshToken;
-  
-  const { newAccessToken, newRefreshToken } = await authService.refreshUserAccessToken(
-    incomingRefreshToken
-  );
+
+  const { newAccessToken, newRefreshToken } =
+    await authService.refreshUserAccessToken(incomingRefreshToken);
 
   res.cookie('refreshToken', newRefreshToken, cookieOptions);
 

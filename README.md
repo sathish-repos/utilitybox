@@ -28,12 +28,14 @@ This is a production-ready, enterprise-grade boilerplate for a Node.js + Express
 ### 2. Installation
 
 1.  **Clone the repository:**
+
     ```bash
     git clone <your-repo-url>
     cd <your-repo-name>
     ```
 
 2.  **Install dependencies:**
+
     ```bash
     npm install
     ```
@@ -55,6 +57,7 @@ This project has two local development modes.
 #### Mode A: Local Server (Recommended for most dev)
 
 This runs the app as a traditional Node.js server.
+
 ```bash
 npm run dev
 ```

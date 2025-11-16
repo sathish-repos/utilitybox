@@ -24,28 +24,26 @@ export const loginSchema = z.object({
   }),
 });
 
-export const refreshTokenSchema = z.object({
-  body: z
-    .object({
-      refreshToken: z.string().min(1, 'Refresh token is required'),
-    })
-    .or(
-      // Allow empty body if refresh token is in cookie
-      z.object({})
-    ),
-  cookies: z
-    .object({
-      refreshToken: z.string().min(1, 'Refresh token is required'),
-    })
-    .or(
-      // Allow empty cookie if token is in body
-      z.object({})
-    ),
-})
-.refine(
-  (data) => data.body.refreshToken || data.cookies.refreshToken, 
-  {
+export const refreshTokenSchema = z
+  .object({
+    body: z
+      .object({
+        refreshToken: z.string().min(1, 'Refresh token is required'),
+      })
+      .or(
+        // Allow empty body if refresh token is in cookie
+        z.object({})
+      ),
+    cookies: z
+      .object({
+        refreshToken: z.string().min(1, 'Refresh token is required'),
+      })
+      .or(
+        // Allow empty cookie if token is in body
+        z.object({})
+      ),
+  })
+  .refine((data) => data.body.refreshToken || data.cookies.refreshToken, {
     message: 'Refresh token must be provided in body or cookie',
     path: ['refreshToken'],
-  }
-);
+  });

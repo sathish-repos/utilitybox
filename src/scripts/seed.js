@@ -1,10 +1,13 @@
 /* eslint-disable no-console */
 import 'dotenv/config';
 import { faker } from '@faker-js/faker';
+import mongoose from 'mongoose';
 import connectDB from '../config/db.js';
 import { User } from '../models/User.model.js';
 import { Product } from '../models/Product.model.js';
 import { Token } from '../models/Token.model.js';
+
+// We need to import mongoose directly for disconnect
 
 const seedDatabase = async () => {
   try {
@@ -60,8 +63,5 @@ const seedDatabase = async () => {
     process.exit(0);
   }
 };
-
-// We need to import mongoose directly for disconnect
-import mongoose from 'mongoose';
 
 seedDatabase();

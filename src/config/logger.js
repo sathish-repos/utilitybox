@@ -19,21 +19,22 @@ const prodFormat = combine(
 
 const logger = winston.createLogger({
   level: config.logLevel || 'info',
-  
+
   // Use 'devFormat' in development, 'prodFormat' otherwise
-  format: config.env === 'development' 
-    ? combine(colorize(), timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }), devFormat)
-    : prodFormat,
-  
+  format:
+    config.env === 'development'
+      ? combine(colorize(), timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }), devFormat)
+      : prodFormat,
+
   transports: [
     new transports.Console(),
     // In a non-serverless prod env, you'd add file transports:
     // new transports.File({ filename: 'logs/error.log', level: 'error' }),
     // new transports.File({ filename: 'logs/combined.log' }),
   ],
-  
+
   // Do not exit on unhandled exceptions
-  exitOnError: false, 
+  exitOnError: false,
 });
 
 export default logger;

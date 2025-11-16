@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import mongoosePaginate from 'mongoose-paginate-v2';
 
 const productSchema = new mongoose.Schema(

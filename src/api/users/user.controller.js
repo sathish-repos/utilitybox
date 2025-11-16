@@ -15,7 +15,7 @@ const getAllUsers = asyncHandler(async (req, res) => {
     page: parseInt(req.query.page, 10) || 1,
     limit: parseInt(req.query.limit, 10) || 10,
   };
-  
+
   const result = await userService.queryUsers(filter, options);
   new ApiResponse(httpStatus.OK, result).send(res);
 });

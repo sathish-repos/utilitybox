@@ -114,7 +114,7 @@ const globalErrorHandler = (err, req, res, next) => {
 
   // --- Production Error Handling ---
   // Mark common errors as 'operational' so the client gets a useful message.
-  
+
   // Zod validation error
   if (error.name === 'ZodError') {
     error = handleZodError(error);
@@ -131,10 +131,10 @@ const globalErrorHandler = (err, req, res, next) => {
   if (error.name === 'CastError') {
     error = handleCastError(error);
   }
-  
+
   // Note: JWT errors are handled directly in auth.middleware.js
   // to provide specific 401 responses, but could also be handled here.
-  
+
   // Send the final production-ready error
   sendErrorProd(error, res);
 };
