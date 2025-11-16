@@ -1,0 +1,59 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x] # Test against LTS versions
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linter
+        run: npm run lint
+
+      - name: Run tests
+        run: npm test
+        env:
+          # We need to set env vars for tests
+          # For a real project, use GitHub Secrets
+          NODE_ENV: test
+          MONGODB_URI: mongodb://localhost:27017/ci-test-db # This will fail unless a service is running
+          JWT_SECRET: test-secret
+          JWT_REFRESH_SECRET: test-refresh-secret
+          
+      # Note: The test step above will fail without a running MongoDB.
+      # For a real CI, you should add a 'services' block to the job:
+      # services:
+      #   mongodb:
+      #     image: mongo:latest
+      #     ports:
+      #       - 27017:27017
+      # Then update MONGODB_URI to: mongodb://localhost:27017/ci-test-db
+
+      # Optional: Vercel Deployment (uncomment and configure secrets)
+      # - name: Deploy to Vercel
+      #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      #   run: vercel --prod --token $VERCEL_TOKEN
+      #   env:
+      #     VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      #     VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      #     VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
