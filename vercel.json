@@ -9,7 +9,7 @@
   ],
   "routes": [
     {
-      "src": "/api/v1/(.*)",
+      "src": "/(.*)",
       "dest": "vercel/index.js"
     }
   ]
